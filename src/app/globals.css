@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
 }
 
 @theme inline {
@@ -10,6 +11,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --font-sans: "Mona-Sans", sans-serif;
+  --color-white-50: #d9ecff;
+  --color-black-50: #1c1c21;
+  --color-black-100: #0e0e10;
+  --color-black-200: #282732;
+  --color-blue-50: #839cb5;
+  --color-blue-100: #2d2d38;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,4 +32,48 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  background-color: black;
+  color: white;
+  scroll-behavior: smooth;
+  font-family: "Mona-Sans", sans-serif;
+}
+
+@layer components {
+  .navbar {
+    @apply fixed w-full left-1/2 py-5 px-5 md:px-20 -translate-x-1/2 z-[100] transition-all duration-200 ease-in-out;
+
+    &.scrolled {
+      @apply top-0 bg-black;
+    }
+
+    &.not-scrolled {
+      @apply md:top-10 top-0 bg-transparent;
+    }
+
+    .inner {
+      @apply mx-auto flex items-center justify-between;
+    }
+
+    .logo {
+      @apply text-white-50 text-xl md:text-2xl font-semibold transition-transform duration-300 hover:scale-105;
+    }
+
+    .desktop {
+      @apply hidden lg:flex items-center;
+    }
+
+    ul {
+      @apply flex space-x-5;
+
+      li {
+        @apply text-white-50 rounded-lg px-3 py-1 text-sm font-semibold transition-colors duration-300 hover:bg-white-50 hover:text-black-100;
+      }
+
+      span {
+        @apply text-white-50 rounded-lg px-3 py-1 text-sm font-semibold transition-colors duration-300 hover:bg-white-50 hover:text-black-100;
+      }
+    }
+
+  }
 }
