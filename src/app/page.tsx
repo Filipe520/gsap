@@ -2,61 +2,126 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
-  const divRef = useRef<HTMLDivElement>(null);
+  const divARef = useRef<HTMLDivElement>(null);
+  const divBRef = useRef<HTMLDivElement>(null);
+  const divCRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const boxes = divRef.current ? divRef.current.querySelectorAll(".box") : [];
 
-    gsap.to(boxes, {
-      scrollTrigger: {
-        trigger: boxes,
-        // top center bottom
-        // 20% 80%
-        start: "20px 80%",
-        // end: "bottom 100px",
-        end: "+=300",
-        markers: true,
-        // as palavras chaves do toggleActions:
-        //  play, pause, resume, reverse, restart, reset, complete, none
-        toggleActions: "restart pause reverse pause",
+    // Animação Div A
+    gsap.fromTo(
+      divARef.current,
+      {
+        opacity: 0,
       },
-      duration: 1,
-      scale: 2,
-      ease: "expo",
-      borderRadius: 20,
-    });
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: divARef.current,
+          // top center bottom
+          // 20% 80%
+          start: "top center",
+          // end: "bottom 100px",
+          end: "top center",
+          scrub: 3,
+          // markers: true,
+          // as palavras chaves do toggleActions:
+          //  play, pause, resume, reverse, restart, reset, complete, none
+          toggleActions: "restart pause reverse pause",
+        },
+        duration: 10,
+        rotate: 360,
+        x: 400,
+        scale: 1.5,
+        ease: "bounce",
+        borderRadius: 20,
+      }
+    );
+    // Animação Div B
+    gsap.fromTo(
+      divBRef.current,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: divBRef.current,
+          // top center bottom
+          // 20% 80%
+          start: "top center",
+          // end: "bottom 100px",
+          end: "top center",
+          scrub: 4,
+          // markers: true,
+          // as palavras chaves do toggleActions:
+          //  play, pause, resume, reverse, restart, reset, complete, none
+          toggleActions: "restart pause reverse pause",
+        },
+        duration: 10,
+        rotate: 360,
+        x: -400,
+        scale: 1.5,
+        ease: "bounce",
+        borderRadius: 20,
+      }
+    );
+    // Animação Div C
+    gsap.fromTo(
+      divCRef.current,
+      {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: divCRef.current,
+          // top center bottom
+          // 20% 80%
+          start: "top center",
+          // end: "bottom 100px",
+          end: "top center",
+          scrub: 5,
+          // markers: true,
+          // as palavras chaves do toggleActions:
+          //  play, pause, resume, reverse, restart, reset, complete, none
+          toggleActions: "restart pause reverse pause",
+        },
+        duration: 10,
+        rotate: 360,
+        x: 400,
+        scale: 1.5,
+        ease: "elastic",
+        borderRadius: 20,
+      }
+    );
   }, []);
 
   return (
-    <main className="min-h-screen bg-zinc-900 text-white flex items-center justify-center">
-      <div className=" m-2 rounded-2xl flex flex-col gap-2" ref={divRef}>
-        {[
-          "lemore",
-          "cabra",
-          "cachorro",
-          "corujas",
-          "flamingo",
-          "girafa",
-          "leopardo",
-          "pato",
-          "veado",
-        ].map((imagem, index) => (
-          <Image
-            src={`/${imagem}.jpg`}
-            alt={`Imagem de uma ${imagem[index]}`}
-            width={500}
-            height={500}
-            className={index === 4 ? "box rounded-2xl" : ""}
-            key={index}
-          />
-        ))}
+    <main className="h-dvh text-white flex items-center justify-between flex-col my-300">
+      <div
+        className=" m-2 rounded-2xl flex items-center justify-center  border border-sky-500 bg-gray-900 gap-2 w-50 h-50"
+        ref={divARef}
+      >
+        <h3>Div - A</h3>
+      </div>
+      <div
+        className=" m-2 rounded-2xl flex items-center justify-center  border border-red-500 bg-gray-900 gap-2 w-50 h-50"
+        ref={divBRef}
+      >
+        <h3>Div - B</h3>
+      </div>
+      <div
+        className=" m-2 rounded-2xl flex items-center justify-center  border border-green-500 bg-gray-900 gap-2 w-50 h-50"
+        ref={divCRef}
+      >
+        <h3>Div - C</h3>
       </div>
     </main>
   );
