@@ -17,14 +17,19 @@ export default function App() {
     gsap.to(boxes, {
       scrollTrigger: {
         trigger: boxes,
+        // top center bottom
+        // 20% 80%
+        start: "20px 80%",
+        // end: "bottom 100px",
+        end: "+=300",
+        markers: true,
         // as palavras chaves do toggleActions:
         //  play, pause, resume, reverse, restart, reset, complete, none
         toggleActions: "restart pause reverse pause",
       },
       duration: 1,
       scale: 2,
-      ease: "bounce.out",
-      border: ".5px solid blue",
+      ease: "expo",
       borderRadius: 20,
     });
   }, []);
@@ -48,9 +53,7 @@ export default function App() {
             alt={`Imagem de uma ${imagem[index]}`}
             width={500}
             height={500}
-            className={
-              index === 2 ? "box border border-transparent rounded-2xl" : ""
-            }
+            className={index === 4 ? "box rounded-2xl" : ""}
             key={index}
           />
         ))}
